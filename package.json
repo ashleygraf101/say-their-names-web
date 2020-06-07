@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^4.7.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "husky": "^4.2.5"
