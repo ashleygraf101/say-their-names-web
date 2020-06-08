@@ -28,4 +28,3 @@ it('404 appears for bad routes', () => {
   cy.visit('https://saytheirname.netlify.app/some/bad/route')
   cy.get('h1')
   	.should('have.text', '404')
-})
