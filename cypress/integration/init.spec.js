@@ -8,20 +8,17 @@ it('displays list of 12 victims on the home page', () => {
     .should('have.length', 12)
 })
 
-it('find Jamel Floyd + verify that alt tags exist', () => {
-  cy.get('[alt="Jamel Floyd"]')
-    .should('have.length', 1)
-})
-
-it('click Jamel Floyd', () => {
-  cy.get('[alt="Jamel Floyd"]').click()
-})
-
-it("click link to Jamel Floyd's justice fund",  () => {
-  cy.get('[type="button"]:first').click({ force: true })
-  cy.get('h2:first')
-  .should('contain.text', 'Donate')
-}) 
+describe('User Story 1', () => {
+  it('find first victim on page and donate to their fund', () => {
+    cy.visit('https://saytheirname.netlify.app/')
+    cy.get('.profile-preview-container').eq(0).click({ force: true })
+    cy.get('[type="button"]:first').click({ force: true })
+    cy.get('button').eq(1)
+    .should('contain.text', 'DONATE NOW')
+    cy.get('button').eq(1).click({ force: true })
+    cy.url().should('not.contain', 'saytheirnames')
+  }) 
+});
 
 it('Tabs appear on donations page', () => {
   cy.visit('https://saytheirname.netlify.app/donations')
