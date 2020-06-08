@@ -23,8 +23,33 @@ it("click link to Jamel Floyd's justice fund",  () => {
   .should('contain.text', 'Donate')
 }) 
 
+it('Tabs appear on donations page', () => {
+  cy.visit('https://saytheirname.netlify.app/donations')
+  cy.get('nav > a').eq(1)
+    .should('have.text', 'Victims')
+})
 
 it('404 appears for bad routes', () => {
   cy.visit('https://saytheirname.netlify.app/some/bad/route')
   cy.get('h1')
   	.should('have.text', '404')
+})
+
+
+it('404 appears for bad routes - donations', () => {
+  cy.visit('https://saytheirname.netlify.app/donations/aaa')
+  cy.get('h1')
+    .should('have.text', '404')
+})
+
+it('404 appears for bad routes - petitions', () => {
+  cy.visit('https://saytheirname.netlify.app/petitions/aaa')
+  cy.get('h1')
+    .should('have.text', '404')
+})
+
+it('404 appears for bad routes - profile', () => {
+  cy.visit('https://saytheirname.netlify.app/profile/aaa')
+  cy.get('h1')
+    .should('have.text', '404')
+})
