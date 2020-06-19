@@ -26,6 +26,18 @@ it('Tabs appear on donations page', () => {
     .should('have.text', 'Victims')
 })
 
+it('Tabs appear on petitions page', () => {
+  cy.visit('https://saytheirname.netlify.app/petitions')
+  cy.get('nav > a').eq(1)
+    .should('have.text', 'Victims')
+})
+
+it('Pagination works properly on petitions page', () => {
+  cy.visit('https://saytheirname.netlify.app/petitions')
+  cy.get('nav > a').eq(1)
+    .should('have.text', 'Victims')
+})
+
 it('404 appears for bad routes', () => {
   cy.visit('https://saytheirname.netlify.app/some/bad/route')
   cy.get('h1')

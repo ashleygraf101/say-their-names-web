@@ -19,15 +19,18 @@ import {
   Context
 } from './styles';
 
+const getSocialCopy = (info) => `Join me in donating to ${info.full_name}’s fund, and supporting their family’s fight for justice. 
+#SayTheirNames #BlackLivesMatter #${info.full_name.replace(/\s+/g, '')}`;
+
+
 const PersonProfile = (props) => {
-  const { info } = props;
+  const { info, donation } = props;
   const {
     images,
     full_name,
     age,
     number_of_children,
     city,
-    identifier,
     their_story,
     outcome,
     country,
@@ -38,7 +41,14 @@ const PersonProfile = (props) => {
     <Profile>
       <PersonalInformation>
         <Photo>
-          <img src={images[0].image_url} alt={full_name} />
+          <img
+            src={
+              images.length === 0
+                ? 'https://say-their-names.fra1.cdn.digitaloceanspaces.com/assets/cover.png'
+                : images[0].image_url
+            }
+            alt={full_name}
+          />
         </Photo>
         <PersonSection>
           <Name>
@@ -53,23 +63,22 @@ const PersonProfile = (props) => {
               <H2>{age}</H2>
             </Age>
             <Children>
-              <H4>CHILDREN</H4>
-              <H2>{number_of_children && number_of_children}</H2>
+              <H4>{number_of_children === 1 ? 'CHILD' : 'CHILDREN'}</H4>
+              <H2>{number_of_children > 0 ? number_of_children : 'N/A'}</H2>
             </Children>
           </Div>
           <Location>
             <H4>LOCATION</H4>
             <H2>{`${city}, ${country}`}</H2>
-
           </Location>
           {donation_links.length > 0 && (
-            <Link to={`/donations/${identifier}`}>
+            <Link to={`/donate/${donation.identifier}`}>
               <Button>
                 <button type="button">DONATE</button>
               </Button>
             </Link>
           )}
-          <Share url={window.location.href} title="#SayTheirNames" />
+          <Share socialCopy={getSocialCopy(info)} url={window.location.href} title="#SayTheirNames" />
         </PersonSection>
       </PersonalInformation>
       <Context>
@@ -96,19 +105,28 @@ PersonProfile.defaultProps = {
   })
 };
 
+PersonProfile.defaultProps = {
+  donation: {
+    identifier: ''
+  }
+};
+
 PersonProfile.propTypes = {
   info: PropTypes.shape({
     images: PropTypes.array.isRequired,
     full_name: PropTypes.string.isRequired,
-    age: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired,
     city: PropTypes.string.isRequired,
-    number_of_children: PropTypes.string,
+    number_of_children: PropTypes.number,
     id: PropTypes.number.isRequired,
     identifier: PropTypes.string.isRequired,
     their_story: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
     outcome: PropTypes.string,
     donation_links: PropTypes.array.isRequired
+  }),
+  donation: PropTypes.shape({
+    identifier: PropTypes.string
   }),
   history: PropTypes.shape({
     push: PropTypes.func.isRequired

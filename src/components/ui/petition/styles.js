@@ -14,6 +14,14 @@ const CardContent = styled.div`
   h3 {
     font-size: 2rem;
     margin: 0;
+
+    @media (max-width: 800px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 500px) {
+      font-size: 1.2rem;
+    }
   }
 
   a {
@@ -35,6 +43,7 @@ const Wrapper = styled.div`
   width: 800px;
   margin: 0 auto;
   margin-bottom: 100px;
+  min-height: 70vh;
 
   @media (max-width: 1300px) {
     width: 70%;
@@ -57,8 +66,9 @@ const ImageDiv = styled.div`
 `;
 
 const Image = styled.img`
-  min-height: 100%;
-  min-width: 100%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 `;
 
 const Type = styled.p`

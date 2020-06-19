@@ -11,6 +11,7 @@ const BackToProfiles = ({
   longText,
   linkText,
   backLink,
+  backState,
   external
 }) => {
   const [sticky, setSticky] = useState('static');
@@ -34,26 +35,28 @@ const BackToProfiles = ({
 
   return (
     <BackProfile style={{ position: sticky, top: 0 }}>
-      <Link to={backLink}>
+      <Link to={{ pathname: backLink, state: backState }}>
         <i className="fas fa-chevron-left" />
         <p>{text}</p>
       </Link>
-      <div className="donate" style={{ display: donationsDisplay }}>
-        <p>{longText}</p>
-        {external ? (
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            <Button width="100px" padding="0.8rem">
-              <button type="button">{linkText}</button>
-            </Button>
-          </a>
-        ) : (
-          <Link to={link}>
-            <Button width="100px" padding="0.8rem">
-              <button type="button">{linkText}</button>
-            </Button>
-          </Link>
-        )}
-      </div>
+      {link && (
+        <div className="donate" style={{ display: donationsDisplay }}>
+          <p>{longText}</p>
+          {external ? (
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              <Button width="100px" padding="0.8rem">
+                <button type="button">{linkText}</button>
+              </Button>
+            </a>
+          ) : (
+            <Link to={link}>
+              <Button width="100px" padding="0.8rem">
+                <button type="button">{linkText}</button>
+              </Button>
+            </Link>
+          )}
+        </div>
+      )}
     </BackProfile>
   );
 };
@@ -61,13 +64,16 @@ const BackToProfiles = ({
 export default BackToProfiles;
 
 BackToProfiles.defaultProps = {
-  external: false
+  external: false,
+  backState: {},
+  link: ''
 };
 BackToProfiles.propTypes = {
   text: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
   longText: PropTypes.string.isRequired,
   linkText: PropTypes.string.isRequired,
   backLink: PropTypes.string.isRequired,
+  backState: PropTypes.shape({}),
   external: PropTypes.bool
 };

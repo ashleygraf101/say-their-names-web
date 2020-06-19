@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Container from '../../components/common/Container';
+import Container from '../common/Container';
 import {
   StyledAbout,
   StyledAboutContainer,
@@ -8,8 +8,8 @@ import {
   StyledAboutBanner,
   StyledLinkContainer
 } from './styles';
-import { Button } from '../../components/profileDetails/styles';
-import AboutBanner from '../../assets/about-banner.svg';
+import { Button } from '../profileDetails/styles';
+import aboutbanner from '../../assets/aboutbanner.svg';
 import Variables from '../../constants/Variables';
 
 const About = () => (
@@ -21,7 +21,7 @@ const About = () => (
           href="https://twitter.com/SayTheirName_io"
           rel="noopener noreferrer"
         >
-          <img src={AboutBanner} alt="Black Lives Matter" />
+          <img src={aboutbanner} alt="Black Lives Matter" />
         </a>
       </StyledAboutBanner>
 
@@ -30,18 +30,18 @@ const About = () => (
         <p>
           Welcome to the Say Their Names Project. Our aim is to build an
           open-source platform to raise awareness of the injustice and often
-          forgotten names of racial inequality at the hands of law enforcement.
-          We strive to identify and amplify verified organizations to ensure
-          donations are reaching those who can make the most impact with it.
+          forgotten names of racial inequality. We strive to identify and
+          amplify verified organizations to ensure donations are reaching
+          those who can make the most impact with it.
         </p>
       </StyledAboutContainer>
       <StyledAboutContainer className="AboutContainer">
         <h3>History on the Say Their Names Movement </h3>
         <p>
           Say Their Names is a social movement to raise awareness for all
-          the black victims of police brutality all around the world. This
-          movement is in response to the Black Lives Matter movement and aims to
-          highlight Individuals affected by anti-Black Violence. Say Their Names
+          the black victims of racial inequality all around the world. This
+          movement is in support of the overall Black Lives Matter movement and aims to
+          highlight individuals affected by anti-Black Violence. Say Their Names
           movement calls attention and demands justice for all victims.
         </p>
       </StyledAboutContainer>
@@ -57,7 +57,7 @@ const About = () => (
               href={Variables.TWITTER_URL}
               rel="noopener noreferrer"
             >
-              Twitter &nbsp;
+              Twitter.
             </a>
           </LinkStyle>
         </p>
@@ -66,18 +66,15 @@ const About = () => (
       <StyledLinkContainer>
         <StyledAboutContainer className="AboutContainer">
           <h3> DID WE MISS SOMEONE?</h3>
-          <p>
-            Request to add a name &nbsp;
-            <LinkStyle>
-              <a
-                target="_blank"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSc_AnI5Ix4wySnFvio1PKrdJNmX86JU4oF2pEWKHp7HXjBZ4w/viewform"
-                rel="noopener noreferrer"
-              >
-                here &nbsp;
-              </a>
-            </LinkStyle>
-          </p>
+          <Button>
+            <a
+              target="_blank"
+              href="https://airtable.com/shr6Da28410B2Muy3"
+              rel="noopener noreferrer"
+            >
+              <button type="button">Request to Add a Name</button>
+            </a>
+          </Button>
         </StyledAboutContainer>
 
         <StyledAboutContainer className="AboutContainer">
