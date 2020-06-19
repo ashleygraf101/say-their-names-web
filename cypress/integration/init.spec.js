@@ -1,64 +1,108 @@
-it('visits the app', () => {
-  cy.visit('https://saytheirname.netlify.app/')
-})
+describe('home page functions', () => {
 
-it('displays list of 12 victims on the home page', () => {
-  cy.wait(3000)
-  cy.get('.profile-preview-container')
-    .should('have.length', 12)
-})
+  it('successfully loads', () => {
+    cy.visit('/')
+  })
 
-describe('User Story 1', () => {
-  it('find first victim on page and donate to their fund', () => {
-    cy.visit('https://saytheirname.netlify.app/')
+
+  it('displays list of 12 victims on the home page', () => {
+    cy.wait(3000)
+    cy.get('.profile-preview-container')
+      .should('have.length', 12)
+  })
+
+  it('go to second page', () => {
+    cy.wait(3000)
+    cy.get('a[role="button"]')
+      .contains('2').click()
+    cy.get('a[role="button"]')
+      .contains('2').click()
+  })  
+
+  it('find first victim on page and ', () => {
     cy.get('.profile-preview-container').eq(0).click({ force: true })
     cy.get('[type="button"]:first').click({ force: true })
-    cy.get('button').eq(1)
-    .should('contain.text', 'DONATE NOW')
-    cy.get('button').eq(1).click({ force: true })
-    cy.url().should('not.contain', 'saytheirnames')
   }) 
+
+  it('share their fund', () => {
+    cy.contains('DONATE NOW').click({ force: true })
+  }) 
+
+  it('share their story', () => {
+    cy.contains('Twitter').click()
+    cy.contains('#').click()
+  }) 
+
 });
 
-it('Tabs appear on donations page', () => {
-  cy.visit('https://saytheirname.netlify.app/donations')
-  cy.get('nav > a').eq(1)
-    .should('have.text', 'Victims')
-})
+describe('donations page', () => {
 
-it('Tabs appear on petitions page', () => {
-  cy.visit('https://saytheirname.netlify.app/petitions')
-  cy.get('nav > a').eq(1)
-    .should('have.text', 'Victims')
-})
+  it("find Victims tab", () => {
+    cy.visit('/donations')
+    cy.contains('Victims').click({ force: true })
+  })
 
-it('Pagination works properly on petitions page', () => {
-  cy.visit('https://saytheirname.netlify.app/petitions')
-  cy.get('nav > a').eq(1)
-    .should('have.text', 'Victims')
-})
+  it("check there are twelve items on the list", () => {
+    cy.get('p').eq(12)
+      .should('have.text', 'VICTIMS')
+    cy.contains('FIND OUT MORE').click()
+  })
 
-it('404 appears for bad routes', () => {
-  cy.visit('https://saytheirname.netlify.app/some/bad/route')
-  cy.get('h1')
-  	.should('have.text', '404')
+  it('Tabs appear on donations page', () => {
+    cy.visit('/donations')
+    cy.get('nav > button').eq(1)
+      .should('have.text', 'Victims')
+  })
+
 })
 
 
-it('404 appears for bad routes - donations', () => {
-  cy.visit('https://saytheirname.netlify.app/donations/aaa')
-  cy.get('h1')
-    .should('have.text', '404')
+
+describe('Refresh pagination on tabs', () => {
+
+  it.skip('petitions page', () => {
+    cy.visit('/petitions')
+    cy.get('nav > button').eq(1)
+      .should('have.text', 'Victims')
+    cy.get('nav > button').eq(3).click({ force: true })
+    cy.contains('Page 1')
+  })
+
+  it.skip('donations page', () => {
+    cy.visit('/donations')
+    cy.get('nav > button').eq(1)
+      .should('have.text', 'Victims')
+    cy.get('nav > button').eq(3).click({ force: true })
+    cy.get('a[role="button"]')
+      .contains('Page 1')
+  })
+
 })
 
-it('404 appears for bad routes - petitions', () => {
-  cy.visit('https://saytheirname.netlify.app/petitions/aaa')
-  cy.get('h1')
-    .should('have.text', '404')
-})
 
-it('404 appears for bad routes - profile', () => {
-  cy.visit('https://saytheirname.netlify.app/profile/aaa')
-  cy.get('h1')
-    .should('have.text', '404')
+describe('404 appears for bad routes', () => {
+  it.skip('donations', () => {
+    cy.visit('/donations/aaa')
+    cy.get('h1')
+      .should('have.text', '404')
+  })
+
+  it.skip('petitions', () => {
+    cy.visit('/petitions/aaa')
+    cy.get('h1')
+      .should('have.text', '404')
+  })
+
+  it.skip('profile', () => {
+    cy.visit('/profile/aaa')
+    cy.get('h1')
+      .should('have.text', '404')
+  })
+
+  it.skip('random url', () => {
+    cy.visit('/some/bad/route')
+    cy.get('h1')
+      .should('have.text', '404')
+  })
+
 })
