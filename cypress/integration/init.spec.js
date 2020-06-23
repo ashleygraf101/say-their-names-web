@@ -2,6 +2,7 @@ describe('home page functions', () => {
 
   it('successfully loads', () => {
     cy.visit('/')
+    cy.title().should('eq', 'Home | Say Their Names')
   })
 
 
