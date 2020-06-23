@@ -5,7 +5,7 @@ import Seo from '../components/common/Seo';
 import Spinner from '../components/common/Spinner';
 import Petition from '../components/ui/petition/Petition';
 import Pagination from '../components/pagination/Pagination';
-import Tabs from '../components/Tabs/Tabs';
+import Tabs from '../components/tabs/Tabs';
 import { Wrapper } from '../components/ui/petition/styles';
 import NotFound from './notFound/NotFound';
 import config from '../utils/config';
